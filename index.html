@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://nursang.carrd.co/assets/images/image19.png?v=26ebe231" type="image/png">
+    <title>Nursang's Desktop</title>
+
+    
+<script>
+if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+    window.location.href = "index-mobile.html";
+}
+</script>
+
+
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+
+
+    <style>
+        /* Music Icon Styles - SIMPLIFIED */
+        .music-toggle {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 200;
+        }
+
+        #musicBtn {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Font declarations */
+        body {
+            font-family: 'Orbitron', sans-serif !important;
+        }
+
+        /* Dimmed glow for main title */
+        h1 {
+            font-family: 'Press Start 2P', cursive !important;
+            text-shadow: 2px 2px 0 #000, 0 0 4px rgba(255, 215, 0, 0.5) !important;
+        }
+
+        /* Tagline + general text */
+        .tagline,
+        p,
+        span,
+        .message,
+        .sender-name,
+        input,
+        button,
+        .window-title-bar,
+        .font-bold,
+        .content-area h1,
+        .content-area p,
+        .home-content .window-title-bar,
+        .chat-header *,
+        .chat-input input,
+        .chat-input button {
+            font-family: 'Orbitron', sans-serif !important;
+        }
+
+        body {
+            background-image: url('https://nursang.carrd.co/assets/images/image03.jpg?v=90346968');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            color: white;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            transition: background-image 1s ease;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        body.night-mode {
+            background-image: url('https://nursang.carrd.co/assets/images/image02.jpg?v=90346968');
+        }
+
+        /* Custom Cursors */
+        * {
+            cursor: url('https://www.rw-designer.com/cursor-view/14469.png'), auto;
+        }
+
+        a, button, .clickable {
+            cursor: url('https://www.rw-designer.com/cursor-view/58959.png'), pointer;
+        }
+
+        /* Main Container - ALLOWS WINDOWS TO LEAVE THE BOUNDARY */
+        .container {
+            width: 95vw;
+            height: 95vh;
+            max-width: 1000px;
+            max-height: 750px;
+            margin: auto;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            padding: 20px;
+            border: 8px solid #5ca8a0;
+            box-shadow: 0 0 30px rgba(92, 168, 160, 0.3);
+            display: flex;
+            flex-direction: column;
+            overflow: visible; /* CRUCIAL: Must be visible for drag to work fully */
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 15px 25px;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            border: 4px solid #ffd700;
+            flex-shrink: 0;
+            position: relative;
+            width: 70%;
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        .logo {
+            width: 100px;
+            height: 100px;
+            margin-right: 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid #ffd700;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            flex-shrink: 0;
+        }
+
+        .header-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: left;
+            flex: 1;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            color: #ffd700;
+            font-size: 1.5em;
+            margin-bottom: 5px;
+            animation: subtleGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes subtleGlow {
+            0%, 100% {
+                text-shadow:
+                    3px 3px 0 #000,
+                    0 0 5px rgba(255, 215, 0, 0.7);
+                color: #ffd700;
+            }
+            50% {
+                text-shadow:
+                    3px 3px 0 #000,
+                    0 0 10px rgba(255, 215, 0, 0.9),
+                    0 0 15px rgba(255, 107, 0, 0.5);
+                color: #fff;
+            }
+        }
+
+        .tagline {
+            font-size: 1em;
+            color: #5ca8a0;
+            margin-top: 0;
+        }
+
+        /* Theme Controls (Includes Music Toggle) */
+        .theme-controls {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 100;
+        }
+
+        .theme-btn {
+            background: transparent;
+            border: none;
+            width: 50px;
+            height: 50px; /* Base size */
+            font-size: 2em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .theme-btn:hover {
+            transform: scale(1.1);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Wrapper for the circular frame and GIF sizing (MUSIC STYLES) */
+        #musicToggle {
+            padding: 0;
+        }
+
+        .music-icon-wrapper {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #FFD700;
+            border: 3px solid #5ca8a0;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Updated CSS for the GIF */
+        #musicToggleIcon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        /* Content Grid */
+        .content-grid {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+            width: 100%;
+            position: relative;
+        }
+
+        /* Main Content */
+        .main-content {
+            background: transparent;
+            border-radius: 0;
+            padding: 0;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        /* Windows Container */
+        .windows-container {
+            flex: 1;
+            overflow: visible; 
+            position: relative;
+            min-height: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Window Styles */
+        .window {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+            transition: opacity 0.2s, visibility 0.2s, transform 0.2s;
+            /* CRUCIAL: Absolute position allows free drag */
+            position: absolute; 
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .draggable {
+            cursor: move;
+            user-select: none;
+        }
+
+        .maximized {
+            width: 100% !important;
+            height: 100% !important;
+            left: 0 !important;
+            top: 0 !important;
+            transform: none !important;
+            z-index: 100 !important;
+        }
+
+        .minimized {
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.8);
+            z-index: 1 !important;
+        }
+
+        /* Window Controls Style */
+        .window-controls button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s;
+        }
+        .window-controls button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Home Window Specific */
+        #homeWindow {
+            width: 70% !important;
+            height: 100% !important;
+            top: 0 !important;
+            left: 0 !important;
+            position: relative;
+            border: 4px solid #5ca8a0 !important;
+            border-radius: 12px !important;
+            z-index: 15;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Style for Home window content */
+        .home-content {
+            background: rgba(255, 255, 255, 0.95);
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .home-content .window-title-bar {
+            background: linear-gradient(135deg, #1e40af, #3b82f6);
+            color: white;
+            padding: 12px 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8em;
+            flex-shrink: 0;
+        }
+
+        .home-content .content-area {
+            flex: 1;
+            padding: -15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 10px;
+            color: #5ca8a0;
+            border-top: 2px solid #5ca8a0;
+            margin-top: 10px;
+            flex-shrink: 0;
+            font-size: 0.8em;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #5ca8a0;
+            border-radius: 5px;
+        }
+
+        /* Pokédex Image Container */
+        .pokedex-container {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            z-index: 10;
+            width: 35vw;
+            max-width: 352px;
+            min-width: 180px;
+            text-align: center;
+        }
+
+        .pokedex-image {
+            width: 100%;
+            height: auto;
+            border-radius: 12px;
+            border: 4px solid #920808;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .pokedex-image:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Chat Container / GUESTBOOK */
+        .chat-container {
+            position: absolute;
+            top: 120px;
+            right: 25px;
+            width: 330px;
+            max-width: 354px;
+            min-width: 180px;
+            height: 500px; 
+
+            background: linear-gradient(135deg, #0d1b2a, #1b263b);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            z-index: 20;
+            border: 3px solid #000000;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, #920808, #da0d2f);
+            color: #ffd700;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-bottom: 2px solid #5ca8a0;
+            text-align: center;
+            justify-content: center;
+        }
+
+        /* Style for the Pokeball Icon */
+        .chat-header .pokeball-icon {
+            width: 24px;
+            height: 24px;
+            content: url('https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Pok%C3%A9_Ball_icon.svg/512px-Pok%C3%A9_Ball_icon.svg.png');
+        }
+
+        /* --- NEW CSS FOR PIXEL ICON (REVISED: Bigger and Borderless) --- */
+        .header-text h1 {
+            position: relative; 
+            padding-right: 80px; 
+            display: inline-block;
+        }
+
+        .header-text h1::after {
+            content: ''; 
+            background-image: url('https://nursang.carrd.co/assets/images/image19.png?v=26ebe231');
+            background-size: contain;
+            background-repeat: no-repeat;
+            
+            /* Positioning and Sizing */
+            position: absolute;
+            top: -55px;
+            right: 0px; 
+            width: 170px;
+            height: 170px;
+            
+            /* Style Changes: Removed border, removed box-shadow, removed border-radius */
+            image-rendering: pixelated; 
+            border: none;
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .header-title h1 {
+            margin: 0;
+            font-size: 18px;
+            font-weight: bold;
+            letter-spacing: 1px;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+            font-family: 'Press Start 2P', cursive !important;
+        }
+
+        .chat-messages {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background: #e0e1dd;
+        }
+
+        .message {
+            margin-bottom: 8px;
+            padding: 8px 10px;
+            background: #ffffff;
+            border-radius: 8px;
+            max-width: 90%;
+            font-size: 14px;
+            border-left: 3px solid #5ca8a0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #0d1b2a;
+            word-wrap: break-word;
+        }
+
+        .message.system-message {
+            border-left: 3px solid #ffd700;
+            background: #fffbe6;
+            text-align: center;
+            margin: 10px auto;
+            max-width: 95%;
+        }
+
+        .message .sender-name {
+            font-weight: bold;
+            font-size: 10px;
+            margin-bottom: 2px;
+            color: #920808;
+        }
+
+        .user-message {
+            background: #d8e2dc;
+            margin-left: auto;
+            border-left: 3px solid #920808;
+        }
+
+        .chat-input {
+            padding: 8px;
+            background: #1b263b;
+            display: flex;
+            border-top: 2px solid #5ca8a0;
+        }
+
+        .chat-input input {
+            flex: 1;
+            padding: 8px;
+            border-radius: 8px;
+            border: 2px solid #5ca8a0;
+            outline: none;
+            font-size: 13px;
+            background: #e0e1dd;
+            color: #0d1b2a;
+        }
+
+        .chat-input button {
+            margin-left: 6px;
+            padding: 8px 16px;
+            background: linear-gradient(135deg, #920808, #da0d2f);
+            color: #ffd700;
+            border: 2px solid #ffd700;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .chat-input button:hover {
+            background: linear-gradient(135deg, #da0d2f, #ff2e4a);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+      
+      /* ============================
+   MOBILE LAYOUT: iPhone 14 Pro Max
+   ============================ */
+@media (max-width: 430px) {
+
+    /* General body adjustments */
+    body {
+        overflow-y: auto; /* allow scrolling */
+        padding: 10px;
+        display: block; /* disable desktop flex centering */
+    }
+
+    /* Main container adjustments */
+    .container {
+        width: 100% !important;
+        max-width: 100%;
+        height: auto !important;
+        margin: 0 auto;
+        border-radius: 0;
+        padding: 10px;
+        border: none;
+        box-shadow: none;
+    }
+
+    /* Stack sections vertically */
+    .pokedex-container {
+        position: relative !important;
+        width: 90% !important;
+        max-width: 400px;
+        margin: 0 auto 20px auto; /* center and spacing */
+        top: 0;
+        right: 0;
+    }
+
+    .chat-container {
+        position: relative !important;
+        width: 95% !important;
+        height: 400px !important;
+        top: 0;
+        right: 0;
+        margin: 0 auto 20px auto; 
+    }
+
+    #homeWindow {
+        position: relative !important;
+        width: 95% !important;
+        height: auto !important;
+        top: 0 !important;
+        left: 0 !important;
+        margin: 0 auto 20px auto;
+        border: 2px solid #5ca8a0 !important;
+    }
+
+    /* Hide floating windows (draggable) */
+    .window {
+        display: none !important;
+    }
+
+    /* Grid adjustments (icons) */
+    .grid-cols-4 {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+    }
+
+    .grid-cols-4 .flex {
+        justify-content: center;
+    }
+
+    .grid-cols-4 img {
+        width: 50px !important;
+        height: 50px !important;
+    }
+
+    .grid-cols-4 span {
+        font-size: 12px !important;
+    }
+
+    .grid-cols-4 button {
+        padding: 3px !important;
+    }
+
+    /* Header adjustments */
+    .header {
+        width: 100% !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        padding: 10px !important;
+    }
+
+    .header-text h1::after {
+        width: 80px !important;
+        height: 80px !important;
+        top: -40px !important;
+        right: -10px !important;
+    }
+
+    .logo {
+        width: 60px !important;
+        height: 60px !important;
+        margin-bottom: 10px;
+    }
+
+    .tagline {
+        font-size: 12px !important;
+        text-align: center;
+    }
+
+    /* Chat box adjustments */
+    .chat-input input {
+        font-size: 14px !important;
+        padding: 8px !important;
+    }
+
+    .chat-input button {
+        font-size: 14px !important;
+        padding: 8px 12px !important;
+    }
+
+    .chat-messages {
+        height: 250px !important;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div class="theme-controls">
+        <button class="theme-btn" id="themeToggle">🌙</button>
+
+        <button class="theme-btn" id="musicToggle">
+            <div class="music-icon-wrapper">
+                <img id="musicToggleIcon" 
+                     src="https://media1.tenor.com/m/tB9MDMlIh_oAAAAC/squirtle-shame.gif" 
+                     alt="Music">
+            </div>
+        </button>
+        </div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="https://nursang.carrd.co/assets/images/image01.jpg?v=90346968" alt="Nursang">
+            </div>
+
+            <div class="header-text">
+                <h1>NURSANG'S DESKTOP</h1>
+                <p class="tagline">Creative Developer | Front-End & Design-Driven</p>
+            </div>
+        </header>
+
+        <div class="pokedex-container">
+            <img src="https://nursang.carrd.co/assets/images/image08.jpg?v=110d6507"
+                 alt="Pokédex"
+                 class="pokedex-image">
+        </div>
+
+        <div class="chat-container">
+            <div class="chat-header">
+                <span class="pokeball-icon"></span>
+                <div class="header-title"><h1>pokedex</h1></div>
+                <span class="pokeball-icon"></span>
+            </div>
+
+            <div id="chatMessages" class="chat-messages">
+    </div>
+            <div class="chat-input">
+                <input id="messageInput" type="text" placeholder="Leave a message for Nuru..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+                <button onclick="sendMessage()">Post</button>
+            </div>
+        </div>
+
+        <div class="content-grid">
+            <div class="main-content">
+                <div class="windows-container">
+                    <div id="homeWindow" class="home-content">
+                        <div class="window-title-bar" id="homeWindow-drag">
+                            <div class="font-bold">Home Desktop</div>
+                        </div>
+
+                        <div class="content-area">
+                            <h1 class="text-3xl font-bold text-center mb-40 text-gray-800">Welcome to My Desktop!</h1>
+
+                            <div class="grid grid-cols-4 gap-6 max-w-3xl mx-auto">
+    <div class="flex flex-col items-center">
+        <button onclick="openWindow('aboutWindow')" class="p-5 bg-gray-100 rounded-2xl hover:bg-purple-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl">
+            <img src="https://nursang.carrd.co/assets/images/image15.png" alt="About" class="w-16 h-16">
+        </button>
+        <span class="mt-4 font-bold text-gray-800 text-lg">About</span>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <button onclick="openWindow('contactWindow')" class="p-5 bg-gray-100 rounded-2xl hover:bg-green-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl">
+            <img src="https://nursang.carrd.co/assets/images/image13.png" alt="Contact" class="w-16 h-16">
+        </button>
+        <span class="mt-4 font-bold text-gray-800 text-lg">Contact</span>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <button onclick="openWindow('workWindow')" class="p-5 bg-gray-100 rounded-2xl hover:bg-yellow-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl">
+            <img src="https://nursang.carrd.co/assets/images/image14.png" alt="Work" class="w-16 h-16">
+        </button>
+        <span class="mt-4 font-bold text-gray-800 text-lg">Work</span>
+    </div>
+
+    <div class="flex flex-col items-center">
+        <button onclick="openWindow('linksWindow')" class="p-5 bg-gray-100 rounded-2xl hover:bg-blue-100 transition-all duration-300 hover:scale-110 active:scale-95 shadow-lg hover:shadow-xl">
+            <img src="https://nursang.carrd.co/assets/images/image12.png" alt="Links" class="w-16 h-16">
+        </button>
+        <span class="mt-4 font-bold text-gray-800 text-lg">Links</span>
+    </div>
+</div>
+
+                    <div id="aboutWindow" class="window bg-white rounded-lg border border-gray-300 minimized" style="width: 320px; height: 320px; top: 150px; left: 200px;">
+                        <div class="draggable bg-purple-600 text-white rounded-t-lg px-4 py-3 flex justify-between items-center" id="aboutWindow-drag">
+                            <div class="font-mono font-bold">About</div>
+                            <div class="flex space-x-2 window-controls">
+                                <button onclick="minimizeWindow('aboutWindow')" style="background-color: #f59e0b;"></button>
+                                <button onclick="maximizeWindow('aboutWindow')" style="background-color: #10b981;"></button>
+                                <button onclick="closeWindow('aboutWindow')" style="background-color: #ef4444;"></button>
+                            </div>
+                        </div>
+                        <div class="p-4 h-[calc(100%-60px)] overflow-auto">
+                            <h2 class="text-lg font-bold mb-2">Creative Developer & Pokémon Enthusiast</h2>
+                            <div class="space-y-3">
+                                <p class="text-gray-600 text-sm">I’m a creative developer with a passion for building clean, interactive, and visually engaging digital experiences. I love blending modern functionality with subtle retro influences to create interfaces that feel both intuitive and unique.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="contactWindow" class="window bg-white rounded-lg border border-gray-300 minimized" style="width: 320px; height: 320px; top: 180px; left: 240px;">
+                        <div class="draggable bg-green-600 text-white rounded-t-lg px-4 py-3 flex justify-between items-center" id="contactWindow-drag">
+                            <div class="font-mono font-bold">Contact</div>
+                            <div class="flex space-x-2 window-controls">
+                                <button onclick="minimizeWindow('contactWindow')" style="background-color: #f59e0b;"></button>
+                                <button onclick="maximizeWindow('contactWindow')" style="background-color: #10b981;"></button>
+                                <button onclick="closeWindow('contactWindow')" style="background-color: #ef4444;"></button>
+                            </div>
+                        </div>
+                        <div class="p-4 h-[calc(100%-60px)] overflow-auto">
+                            <h2 class="text-lg font-bold mb-2">Get in Touch</h2>
+                            <p class="text-gray-700 text-sm mb-4">Feel free to reach out:</p>
+                            <div class="space-y-3">
+                                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-medium text-gray-800 mr-3">📧</span>
+                                    <span class="text-gray-700">nsherpa2@cougars.ccis.edu</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-medium text-gray-800 mr-3">📱</span>
+                                    <span class="text-gray-700">**********</span>
+                                </div>
+                                <div class="flex items-center p-3 bg-gray-50 rounded-lg">
+                                    <span class="font-medium text-gray-800 mr-3">📍</span>
+                                    <span class="text-gray-700">Denver, CO</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="workWindow" class="window bg-white rounded-lg border border-gray-300 minimized" style="width: 320px; height: 320px; top: 210px; left: 280px;">
+                        <div class="draggable bg-yellow-600 text-white rounded-t-lg px-4 py-3 flex justify-between items-center" id="workWindow-drag">
+                            <div class="font-mono font-bold">Work</div>
+                            <div class="flex space-x-2 window-controls">
+                                <button onclick="minimizeWindow('workWindow')" style="background-color: #f59e0b;"></button>
+                                <button onclick="maximizeWindow('workWindow')" style="background-color: #10b981;"></button>
+                                <button onclick="closeWindow('workWindow')" style="background-color: #ef4444;"></button>
+                            </div>
+                        </div>
+                        <div class="p-4 h-[calc(100%-60px)] overflow-auto">
+                            <h2 class="text-lg font-bold mb-2">My Work</h2>
+                            <p class="text-gray-700 text-sm mb-4">Projects & Experience</p>
+                            <div class="space-y-3">
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <h3 class="font-bold text-gray-800 mb-1">Web Development</h3>
+                                    <p class="text-gray-600 text-sm">Interactive portfolios, web applications, and creative coding projects.</p>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <h3 class="font-bold text-gray-800 mb-1">UI/UX Design</h3>
+                                    <p class="text-gray-600 text-sm">User-centered design with focus on accessibility and modern aesthetics.</p>
+                                </div>
+                                <div class="p-3 bg-gray-50 rounded-lg">
+                                    <h3 class="font-bold text-gray-800 mb-1">Creative Coding</h3>
+                                    <p class="text-gray-600 text-sm">Experimental projects combining art, technology, and interactivity.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="linksWindow" class="window bg-white rounded-lg border border-gray-300 minimized" style="width: 320px; height: 320px; top: 240px; left: 320px;">
+                        <div class="draggable bg-blue-600 text-white rounded-t-lg px-4 py-3 flex justify-between items-center" id="linksWindow-drag">
+                            <div class="font-mono font-bold">Links</div>
+                            <div class="flex space-x-2 window-controls">
+                                <button onclick="minimizeWindow('linksWindow')" style="background-color: #f59e0b;"></button>
+                                <button onclick="maximizeWindow('linksWindow')" style="background-color: #10b981;"></button>
+                                <button onclick="closeWindow('linksWindow')" style="background-color: #ef4444;"></button>
+                            </div>
+                        </div>
+                        <div class="p-4 h-[calc(100%-60px)] overflow-auto">
+                            <h2 class="text-lg font-bold mb-2">Important Links</h2>
+                            <p class="text-gray-700 text-sm mb-4">Connect with me on these platforms:</p>
+                            <div class="space-y-3">
+                                <a href="https://github.com/yourusername" target="_blank" class="flex items-center p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" alt="GitHub" class="w-6 h-6 mr-3">
+                                    <span class="font-medium text-gray-800">GitHub</span>
+                                </a>
+                                <a href="#" target="_blank" class="flex items-center p-3 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
+                                    <img src="https://cdn-icons-png.flaticon.com/512/1384/1384072.png" alt="LinkedIn" class="w-6 h-6 mr-3">
+                                    <span class="font-medium text-gray-800">LinkedIn</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2025 Nursang • Powered by Passion, Design & Code</p>
+            <p style="margin-top: 5px; font-size: 0.7em;">
+                ✨ All Pokémon assets are trademarks of Nintendo ✨
+            </p>
+        </footer>
+    </div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="pokemon-saxophone.mp3" type="audio/mp3">
+        Your browser does not support the audio element.
+    </audio>
+
+  <script>
+    // ====== WINDOW CONTROL FUNCTIONS ======
+
+    function openWindow(id) {
+        const windowElement = document.getElementById(id);
+        if (windowElement) {
+            windowElement.classList.remove('minimized');
+            windowElement.classList.remove('maximized'); 
+            windowElement.style.zIndex = getNextZIndex();
+        }
+    }
+
+    function closeWindow(id) {
+        document.getElementById(id).classList.add('minimized');
+        document.getElementById(id).classList.remove('maximized'); 
+    }
+
+    function minimizeWindow(id) {
+        document.getElementById(id).classList.add('minimized');
+    }
+
+    function maximizeWindow(id) {
+        const windowElement = document.getElementById(id);
+        windowElement.classList.toggle('maximized');
+        if(windowElement.classList.contains('maximized')) {
+            windowElement.style.zIndex = getNextZIndex();
+        }
+    }
+
+    let zIndexCounter = 30; 
+
+    function getNextZIndex() {
+        zIndexCounter += 1;
+        return zIndexCounter;
+    }
+
+    // ====== DRAGGING LOGIC (FREE MOVEMENT) ======
+
+    let elmnt = null;
+    let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+    // --- INITIALIZATION AND LISTENERS (CORRECTED SINGLE BLOCK) ---
+    document.addEventListener('DOMContentLoaded', () => {
+        
+        // ** 1. DISPLAY INITIAL WELCOME MESSAGE WITH RANDOM NUMBER **
+        displayWelcomeMessage(); 
+
+        const windows = document.querySelectorAll('.window');
+        windows.forEach(win => {
+            // Bring window to front on click
+            win.onmousedown = () => {
+                win.style.zIndex = getNextZIndex();
+            };
+
+            const dragHandleId = win.id + "-drag";
+            const dragHandle = document.getElementById(dragHandleId);
+            
+            if (dragHandle) {
+                if (win.id !== 'homeWindow') {
+                    dragHandle.onmousedown = dragMouseDown;
+                }
+            }
+        });
+
+        // ** 2. CHAT INPUT LISTENER (Handles "Enter" key press) **
+        const inputField = document.getElementById('messageInput');
+        if (inputField) {
+            inputField.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    sendMessage();
+                }
+            });
+        }
+    });
+
+    function dragMouseDown(e) {
+        e = e || window.event;
+        
+        if (e.target.closest('.window-controls')) {
+            return;
+        }
+        
+        e.preventDefault();
+        
+        elmnt = this.closest('.window');
+        if (!elmnt) return;
+        
+        elmnt.style.zIndex = getNextZIndex();
+
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        document.onmouseup = closeDragElement;
+        document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+        e = e || window.event;
+        e.preventDefault();
+        
+        pos1 = pos3 - e.clientX;
+        pos2 = pos4 - e.clientY;
+        pos3 = e.clientX;
+        pos4 = e.clientY;
+        
+        elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+        elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+        document.onmouseup = null;
+        document.onmousemove = null;
+    }
+
+    // ====== THEME TOGGLE LOGIC (DAY/NIGHT) ======
+
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('night-mode');
+        const isNightMode = body.classList.contains('night-mode');
+        themeToggle.textContent = isNightMode ? '☀️' : '🌙';
+    });
+
+    // ====== MUSIC TOGGLE LOGIC ======
+
+    const musicButton = document.getElementById('musicToggle');
+    const musicIcon = document.getElementById('musicToggleIcon');
+    const audio = document.getElementById('backgroundMusic');
+    let isMusicPlaying = false;
+
+    musicButton.addEventListener('click', () => {
+        if (isMusicPlaying) {
+            audio.pause();
+            musicIcon.src = 'https://media1.tenor.com/m/tB9MDMlIh_oAAAAC/squirtle-shame.gif'; 
+            isMusicPlaying = false;
+        } else {
+            audio.play().catch(error => {
+                console.error("Autoplay failed:", error);
+            });
+            musicIcon.src = 'https://media1.tenor.com/m/fn1bC0PLxSUAAAAd/squirtle-sax-squirtle.gif'; 
+            isMusicPlaying = true;
+        }
+
+        audio.volume = 0.4;
+
+    });
+
+    // =======================================================
+    // ** CHAT / GUESTBOOK LOGIC WITH RANDOM TRAINER NUMBER **
+    // =======================================================
+
+    // Function to generate a random 5-digit trainer number
+    function generateTrainerNumber() {
+        // Generates a number between 10000 and 99999
+        return Math.floor(10000 + Math.random() * 90000);
+    }
+
+    // NEW FUNCTION: Display Welcome Message with Random Number
+    function displayWelcomeMessage() {
+        const chatMessages = document.getElementById('chatMessages');
+        
+        // Generate a random 5-digit number for the initial display
+        const initialTrainerNumber = generateTrainerNumber();
+
+        const welcomeMessage = document.createElement('div');
+        welcomeMessage.classList.add('message', 'system-message');
+        
+        // Insert the actual random number into the welcome text
+        welcomeMessage.innerHTML = `
+            Welcome to the Pokédex! Leave a message for Nuru. Here is your trainer number <strong>#${initialTrainerNumber}</strong>.
+        `;
+        
+        chatMessages.appendChild(welcomeMessage);
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Function to handle sending a message
+    function sendMessage() {
+        const chatMessages = document.getElementById('chatMessages');
+        const messageInput = document.getElementById('messageInput');
+        const messageText = messageInput.value.trim();
+
+        if (messageText === "") {
+            return; // Don't send empty messages
+        }
+
+        // 1. Generate a new, random Trainer Number for the sender
+        const trainerNumber = generateTrainerNumber();
+
+        // 2. Create the new message element
+        const newMessage = document.createElement('div');
+        newMessage.classList.add('message', 'user-message'); 
+
+        // 3. Construct the message content using the random Trainer Number
+        newMessage.innerHTML = `
+            <div class="sender-name">Trainer #${trainerNumber}</div>
+            ${messageText}
+        `;
+
+        // 4. Append the message to the chat
+        chatMessages.appendChild(newMessage);
+
+        // 5. Clear the input field
+        messageInput.value = '';
+
+        // 6. Scroll to the bottom of the chat box to show the new message
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+</script>
+
+<script>
+  // Select the header H1
+  const headerH1 = document.querySelector('.header-text h1');
+
+  // Change text based on device
+  if (/Mobi|Android|iPhone/i.test(navigator.userAgent)) {
+      headerH1.textContent = "NURSANG'S PHONE";
+  } else {
+      headerH1.textContent = "NURSANG'S DESKTOP";
+  }
+</script>
+
+
+</body>
+</html>
