@@ -144,9 +144,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Apply saved music state
     if (isMusicPlaying) {
         backgroundMusic.play();
-        musicIcon.src = 'https://media1.tenor.com/m/tB9MDMlIh_oAAAAC/squirtle-shame.gif'; // Play GIF
+        musicIcon.src = 'https://media1.tenor.com/m/fn1bC0PLxSUAAAAd/squirtle-sax-squirtle.gif'; // Play GIF
     } else {
-        musicIcon.src = 'https://nursang.carrd.co/assets/images/image05.png?v=90346968'; // Static Image
+        musicIcon.src = 'https://media1.tenor.com/m/tB9MDMlIh_oAAAAC/squirtle-shame.gif'; // Static Image
     }
 
 
@@ -160,11 +160,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (backgroundMusic.paused) {
             backgroundMusic.play();
             localStorage.setItem('musicPlaying', 'true');
-            musicIcon.src = 'https://media1.tenor.com/m/tB9MDMlIh_oAAAAC/squirtle-shame.gif';
+            musicIcon.src = 'https://media1.tenor.com/m/fn1bC0PLxSUAAAAd/squirtle-sax-squirtle.gif';
         } else {
             backgroundMusic.pause();
             localStorage.setItem('musicPlaying', 'false');
-            musicIcon.src = 'https://nursang.carrd.co/assets/images/image05.png?v=90346968';
+            musicIcon.src = 'https://media1.tenor.com/m/tB9MDMlIh_oAAAAC/squirtle-shame.gif';
         }
     });
 
